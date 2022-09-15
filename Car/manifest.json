@@ -1,0 +1,9 @@
+{
+  "filename": "CarExample.dll",
+  "author": "Locochoco",
+  "name": "Car Example",
+  "uniqueName": "Locochoco.CarExample",
+  "version": "0.1.0",
+  "owmlVersion": "2.0.0",
+  "dependencies": [ "Locochoco.SlateShipyard" ]
+}
