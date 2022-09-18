@@ -33,7 +33,7 @@ namespace CarExample.Car
 
             drivePrompt = new ScreenPrompt(InputLibrary.thrustZ, drivePromptStr, 1);
             steerPrompt = new ScreenPrompt(InputLibrary.thrustX, steerPromptStr, 1);
-            freeLookPrompt = new ScreenPrompt(InputLibrary.freeLook,freeLookPromptStr, 1);
+            freeLookPrompt = new ScreenPrompt(InputLibrary.freeLook, freeLookPromptStr, 1);
 
             attachPoint = this.GetRequiredComponent<PlayerAttachPoint>();
             interactVolume = this.GetRequiredComponent<SingleInteractionVolume> ();
@@ -58,7 +58,7 @@ namespace CarExample.Car
 
                 Locator.GetPromptManager().AddScreenPrompt(drivePrompt, PromptPosition.LowerLeft, true);
                 Locator.GetPromptManager().AddScreenPrompt(steerPrompt, PromptPosition.LowerLeft, true);
-                Locator.GetPromptManager().AddScreenPrompt(freeLookPrompt, PromptPosition.LowerLeft, true);
+                Locator.GetPromptManager().AddScreenPrompt(freeLookPrompt, PromptPosition.UpperRight, true);
             }
         }
 
