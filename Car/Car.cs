@@ -4,7 +4,7 @@ using CarExample.Car;
 using OWML.Common;
 
 namespace CarExample
-{
+{    
     public class CarInnit : ModBehaviour
     {
         public static GameObject carPrefab;
@@ -19,5 +19,5 @@ namespace CarExample
             modHelper = ModHelper;
             gameObject.AddComponent<CarSpawn>();
         }
-    }
+    }    
 }

@@ -16,11 +16,13 @@ namespace CarExample.Car
 
         private ScreenPrompt drivePrompt;
         private ScreenPrompt steerPrompt;
+        private ScreenPrompt freeLookPrompt;
 
         public CarWheelController carWheelController;
 
         private string drivePromptStr = "Drive";
         private string steerPromptStr = "Steer";
+        private string freeLookPromptStr = "Free Look";
 
         public event Action OnEnterCarConsole;
         public event Action OnExitCarConsole;
@@ -31,6 +33,7 @@ namespace CarExample.Car
 
             drivePrompt = new ScreenPrompt(InputLibrary.thrustZ, drivePromptStr, 1);
             steerPrompt = new ScreenPrompt(InputLibrary.thrustX, steerPromptStr, 1);
+            freeLookPrompt = new ScreenPrompt(InputLibrary.freeLook,freeLookPromptStr, 1);
 
             attachPoint = this.GetRequiredComponent<PlayerAttachPoint>();
             interactVolume = this.GetRequiredComponent<SingleInteractionVolume> ();
@@ -55,6 +58,7 @@ namespace CarExample.Car
 
                 Locator.GetPromptManager().AddScreenPrompt(drivePrompt, PromptPosition.LowerLeft, true);
                 Locator.GetPromptManager().AddScreenPrompt(steerPrompt, PromptPosition.LowerLeft, true);
+                Locator.GetPromptManager().AddScreenPrompt(freeLookPrompt, PromptPosition.LowerLeft, true);
             }
         }
 
@@ -72,6 +76,7 @@ namespace CarExample.Car
 
                 Locator.GetPromptManager().RemoveScreenPrompt(drivePrompt);
                 Locator.GetPromptManager().RemoveScreenPrompt(steerPrompt);
+                Locator.GetPromptManager().RemoveScreenPrompt(freeLookPrompt);
             }
         }
     }

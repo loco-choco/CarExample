@@ -1,4 +1,5 @@
 ﻿using SlateShipyard.ShipSpawner;
+using SlateShipyard.PlayerAttaching;
 using SlateShipyard.Modules.Wheels;
 
 using UnityEngine;
@@ -27,7 +28,11 @@ namespace CarExample.Car
             GameObject carSeat = carBody.transform.GetChild(3).gameObject;
             carSeat.AddComponent<InteractZone>().ChangePrompt(seatOnPrompt);
 
-            PlayerAttachPoint attachPoint = carSeat.AddComponent<PlayerAttachPoint>();
+            FreeLookablePlayerAttachPoint attachPoint = carSeat.AddComponent<FreeLookablePlayerAttachPoint>();
+            attachPoint.AllowFreeLook = () =>
+            {
+                return carWheelController.enabled;
+            };
             attachPoint._lockPlayerTurning = true;
             attachPoint._centerCamera = true;
             CarConsole carConsole = carSeat.AddComponent<CarConsole>();
