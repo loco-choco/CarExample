@@ -3,7 +3,7 @@ using SlateShipyard.Modules.Wheels;
 
 namespace CarExample.Car
 {
-    internal class CarWheelController : BasicWheelController
+    public class CarWheelController : BasicWheelController
     {
         public CarConsole carConsole;
         public Transform steeringWheel;
@@ -12,7 +12,7 @@ namespace CarExample.Car
         {
             enabled = false;
         }
-        public void Innit() 
+        public void Init() 
         {
             carConsole.OnEnterCarConsole += OnEnterCarConsole;
             carConsole.OnExitCarConsole += OnExitCarConsole;
@@ -23,15 +23,29 @@ namespace CarExample.Car
             carConsole.OnExitCarConsole -= OnExitCarConsole;
         }
 
+        private bool isPuppet;
+        public float externalAccelerationValue = 0f;
+        public void IsPuppet(bool isPuppet)
+        {
+            this.isPuppet = isPuppet;
+        }
+        private float GetTranslationInput()
+        {
+            return isPuppet ? externalAccelerationValue : OWInput.GetValue(InputLibrary.thrustZ);
+        }
+
         public override void Update()
         {
-            float accelerationValue = OWInput.GetValue(InputLibrary.thrustZ);
+            float accelerationValue = GetTranslationInput();
             steeringWheel.localPosition = - Vector3.forward * accelerationValue * 0.5f;
 
             float steerValue = OWInput.GetValue(InputLibrary.thrustX);
             float steerAngle = maxSteerAngle * steerValue;
 
             steeringWheel.localRotation = Quaternion.Euler(Vector3.forward * steerAngle);
+
+            if (isPuppet)
+                return;
 
             frontRWheel.steerAngle = steerAngle;
             frontLWheel.steerAngle = steerAngle;

@@ -18,11 +18,13 @@ namespace CarExample.Car
         {
             GameObject carBody = Instantiate(CarInit.carPrefab);
 
+            //TODO dissable this
             CarBody carBodyRigid = carBody.AddComponent<CarBody>();
             CarWheelController carWheelController = carBody.AddComponent<CarWheelController>();
-            carBody.AddComponent<CarControlledVanish>();
-            carBody.AddComponent<ImpactSensor>();
+            CarControlledVanish carControlledVanish = carBody.AddComponent<CarControlledVanish>();
+            ImpactSensor impactSensor = carBody.AddComponent<ImpactSensor>();
 
+            //TODO dissable this
             #region Car_Seat
             //Assento
             GameObject carSeat = carBody.transform.GetChild(3).gameObject;
@@ -41,8 +43,8 @@ namespace CarExample.Car
 
             carWheelController.carConsole = carConsole;
             carBodyRigid.carConsole = carConsole;
-            carWheelController.Innit();
-            carBodyRigid.Innit();
+            carWheelController.Init();
+            carBodyRigid.Init();
             #endregion
 
             #region Car_Detectors
@@ -71,6 +73,8 @@ namespace CarExample.Car
             Transform wheels = carBody.transform.GetChild(4);
             for (int i = 0; i < 4; i++)
             {
+                //TODO make the physics in OWSimpleRaycastWheel toggleable
+                //TODO add sync for this
                 OWSimpleRaycastWheel wheel = wheels.GetChild(i).gameObject.AddComponent<OWSimpleRaycastWheel>();
                 wheel.collisionMask = OWLayerMask.physicalMask;
 
@@ -94,8 +98,30 @@ namespace CarExample.Car
             carWheelController.maxAccelerationForce = 10f;
 
             //Steering wheel
+            //TODO add sync for this
             carWheelController.steeringWheel = carBody.transform.GetChild(2).GetChild(0).GetChild(0);
 
+            #region CarExample_Networking
+            CarExampleNetworkingInterface carExampleNetworkingInterface = carBody.AddComponent<CarExampleNetworkingInterface>();
+            carExampleNetworkingInterface.flWheel = carWheelController.frontLWheel;
+            carExampleNetworkingInterface.frWheel = carWheelController.frontRWheel;
+            carExampleNetworkingInterface.carWheelController = carWheelController;
+
+            carExampleNetworkingInterface.RigidbodyToKinematicWhenPuppet = true;
+
+            carExampleNetworkingInterface.gameObjectsToDisableWhenPuppet = new GameObject[]
+            {
+                carSeat,
+                carDetector,
+            };
+            carExampleNetworkingInterface.scriptsToDisableWhenPuppet = new MonoBehaviour[]
+            {
+                carBodyRigid,
+                carControlledVanish,
+                impactSensor,
+
+            };
+            #endregion
 
             return carBody;
         }

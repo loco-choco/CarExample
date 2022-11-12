@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CarExample.Car
 {
-    internal class CarConsole : MonoBehaviour
+    public class CarConsole : MonoBehaviour
     {
         public OWRigidbody carBody;
 

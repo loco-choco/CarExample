@@ -7,7 +7,7 @@ namespace CarExample.Car
         private bool _isPlayerAtCarConsole;
         public CarConsole carConsole;
 
-        public void Innit() 
+        public void Init() 
         {
             carConsole.OnEnterCarConsole += OnEnterFlightConsole;
             carConsole.OnExitCarConsole += OnExitFlightConsole;
