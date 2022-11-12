@@ -5,7 +5,7 @@ using OWML.Common;
 
 namespace CarExample
 {    
-    public class CarInnit : ModBehaviour
+    public class CarInit : ModBehaviour
     {
         public static GameObject carPrefab;
         public static IModHelper modHelper;

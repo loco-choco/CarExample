@@ -1,5 +1,4 @@
-﻿using CarExample;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace CarExample.Car

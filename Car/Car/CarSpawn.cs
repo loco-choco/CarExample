@@ -16,7 +16,7 @@ namespace CarExample.Car
         }
         public GameObject CreateCar()
         {
-            GameObject carBody = Instantiate(CarInnit.carPrefab);
+            GameObject carBody = Instantiate(CarInit.carPrefab);
 
             CarBody carBodyRigid = carBody.AddComponent<CarBody>();
             CarWheelController carWheelController = carBody.AddComponent<CarWheelController>();
@@ -95,6 +95,8 @@ namespace CarExample.Car
 
             //Steering wheel
             carWheelController.steeringWheel = carBody.transform.GetChild(2).GetChild(0).GetChild(0);
+
+
             return carBody;
         }
     }
