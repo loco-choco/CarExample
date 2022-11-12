@@ -5,37 +5,23 @@ namespace CarExample.Car
 {
     public class CarExampleNetworkingInterface : SimpleNetworkingInterface
     {
-        public OWSimpleRaycastWheel frWheel;
-        public OWSimpleRaycastWheel flWheel;
-
         public CarWheelController carWheelController;
 
         [SyncableProperty]
-        public float frWheelAngle
-        {
-            get => frWheel.steerAngle;
-            set => frWheel.steerAngle = value;
-        }
-
-        [SyncableProperty]
-        public float flWheelAngle
-        {
-            get => flWheel.steerAngle;
-            set => flWheel.steerAngle = value;
-        }
-
-        [SyncableProperty]
-        public float steeringAngle
+        public float accelerationValue
         {
             get => OWInput.GetValue(InputLibrary.thrustZ);
             set => carWheelController.externalAccelerationValue = value;
         }
+        [SyncableProperty]
+        public float steeringValue
+        {
+            get => OWInput.GetValue(InputLibrary.thrustZ);
+            set => carWheelController.externalSteerValue = value;
+        }
         public override void OnIsPuppetChange(bool isPuppet)
         {
             base.OnIsPuppetChange(isPuppet);
-
-            flWheel.enablePhysics = !isPuppet;
-            frWheel.enablePhysics = !isPuppet;
 
             carWheelController.IsPuppet(isPuppet);
         }

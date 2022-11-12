@@ -55,7 +55,6 @@ namespace CarExample.Car
             shape.CopySettingsFromCollider();
             shape.RecalculateLocalBounds();
             shape.SetCollisionMode(Shape.CollisionMode.Detector);
-            ShapeManager.AddShape(shape);
 
             carDetector.AddComponent<DynamicForceDetector>();
             carDetector.AddComponent<SectorDetector>();
@@ -103,8 +102,6 @@ namespace CarExample.Car
 
             #region CarExample_Networking
             CarExampleNetworkingInterface carExampleNetworkingInterface = carBody.AddComponent<CarExampleNetworkingInterface>();
-            carExampleNetworkingInterface.flWheel = carWheelController.frontLWheel;
-            carExampleNetworkingInterface.frWheel = carWheelController.frontRWheel;
             carExampleNetworkingInterface.carWheelController = carWheelController;
 
             carExampleNetworkingInterface.RigidbodyToKinematicWhenPuppet = true;
@@ -113,13 +110,13 @@ namespace CarExample.Car
             {
                 carSeat,
                 carDetector,
+                carBody.transform.GetChild(0).gameObject,
             };
             carExampleNetworkingInterface.scriptsToDisableWhenPuppet = new MonoBehaviour[]
             {
                 carBodyRigid,
                 carControlledVanish,
                 impactSensor,
-
             };
             #endregion
 

@@ -25,13 +25,22 @@ namespace CarExample.Car
 
         private bool isPuppet;
         public float externalAccelerationValue = 0f;
+        public float externalSteerValue = 0f;
         public void IsPuppet(bool isPuppet)
         {
             this.isPuppet = isPuppet;
+            enabled = isPuppet;
+
+            frontRWheel.enablePhysics = !isPuppet;
+            frontLWheel.enablePhysics = !isPuppet;
         }
         private float GetTranslationInput()
         {
             return isPuppet ? externalAccelerationValue : OWInput.GetValue(InputLibrary.thrustZ);
+        }
+        private float GetSteerInput()
+        {
+            return isPuppet ? externalSteerValue : OWInput.GetValue(InputLibrary.thrustX);
         }
 
         public override void Update()
@@ -39,13 +48,10 @@ namespace CarExample.Car
             float accelerationValue = GetTranslationInput();
             steeringWheel.localPosition = - Vector3.forward * accelerationValue * 0.5f;
 
-            float steerValue = OWInput.GetValue(InputLibrary.thrustX);
+            float steerValue = GetSteerInput();
             float steerAngle = maxSteerAngle * steerValue;
 
             steeringWheel.localRotation = Quaternion.Euler(Vector3.forward * steerAngle);
-
-            if (isPuppet)
-                return;
 
             frontRWheel.steerAngle = steerAngle;
             frontLWheel.steerAngle = steerAngle;
