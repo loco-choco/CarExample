@@ -7,10 +7,11 @@ namespace CarExample.Car
         private bool _isPlayerAtCarConsole;
         public CarConsole carConsole;
 
-        public void Init() 
+        public override void Awake() 
         {
             carConsole.OnEnterCarConsole += OnEnterFlightConsole;
             carConsole.OnExitCarConsole += OnExitFlightConsole;
+            base.Awake();
         }
 
         public override void OnDestroy()

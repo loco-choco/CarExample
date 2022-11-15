@@ -10,12 +10,9 @@ namespace CarExample.Car
 
         public void Awake()
         {
-            enabled = false;
-        }
-        public void Init() 
-        {
             carConsole.OnEnterCarConsole += OnEnterCarConsole;
             carConsole.OnExitCarConsole += OnExitCarConsole;
+            enabled = false;
         }
         public  void OnDestroy()
         {
