@@ -3,7 +3,7 @@
   "author": "Locochoco",
   "name": "Car Example",
   "uniqueName": "Locochoco.CarExample",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "owmlVersion": "2.0.0",
   "dependencies": [ "Locochoco.SlateShipyard" ]
 }
