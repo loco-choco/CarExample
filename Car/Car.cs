@@ -1,7 +1,7 @@
-﻿using OWML.ModHelper;
-using UnityEngine;
-using CarExample.Car;
+﻿using UnityEngine;
+using OWML.ModHelper;
 using OWML.Common;
+using SlateShipyard.ShipSpawner;
 
 namespace CarExample
 {    
@@ -17,7 +17,7 @@ namespace CarExample
             carPrefab = bundle.LoadAsset<GameObject>("car_body.prefab");
 
             modHelper = ModHelper;
-            gameObject.AddComponent<CarSpawn>();
+            ShipSpawnerManager.AddShip(carPrefab, "Car Example");
         }
     }    
 }
