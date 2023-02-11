@@ -53,6 +53,7 @@ namespace CarExample.Car
                 attachPoint.AttachPlayer();
                 interactVolume.DisableInteraction();
                 enabled = true;
+                OWInput.ChangeInputMode(InputMode.ShipCockpit);
                 OnEnterCarConsole?.Invoke();
 
                 Locator.GetPromptManager().AddScreenPrompt(drivePrompt, PromptPosition.LowerLeft, true);
@@ -63,13 +64,14 @@ namespace CarExample.Car
 
         private void Update()
         {
-            if (OWInput.IsNewlyPressed(InputLibrary.cancel, InputMode.All))
+            if (OWInput.IsNewlyPressed(InputLibrary.cancel, InputMode.ShipCockpit))
             {
                 attachPoint.DetachPlayer();
                 playerAudio.PlayOneShotInternal(AudioType.ShipCockpitUnbuckle);
                 interactVolume.EnableInteraction();
                 interactVolume.ResetInteraction();
                 enabled = false;
+                OWInput.RestorePreviousInputs();
                 OnExitCarConsole?.Invoke();
 
 
